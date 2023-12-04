@@ -8,6 +8,6 @@
     BackgroundColor="Transparent">
     <ShellContent
         Title=""
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate local:Expenses}"
         Route="MainPage" />
 </Shell>
