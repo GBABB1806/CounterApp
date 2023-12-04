@@ -6,12 +6,13 @@
     <ScrollView>
         <ScrollView.Background>
             <LinearGradientBrush
-                    EndPoint="0.1,1">
+                    EndPoint="1,-1"
+                    StartPoint="-1, 1">
                 <GradientStop
-                        Color="#ab2727"
+                        Color="#2eb2bb"
                         Offset="-0.2"/>
                 <GradientStop
-                        Color="#241e92"
+                        Color="#030547"
                         Offset="1"/>
             </LinearGradientBrush>
         </ScrollView.Background>
@@ -25,17 +26,18 @@
                 Text="0.00 €"
                 SemanticProperties.HeadingLevel="Level1"
                 FontAttributes="Bold"
-                TextColor="Red"
+                TextColor="#9d0000"
                 FontSize="Header"
                 HorizontalOptions="Center"
-                FontFamily="ChequeRegular"/>
+                FontFamily="ChequeBlack"/>
 
             <Button
                 x:Name = "Spese"
                 Text="EXPENSES"
                 HorizontalOptions="Center"
                 WidthRequest="200"
-                TextColor="#8549DF"
+                TextColor="#38b6ff"
+                Clicked="Spese_Clicked"
                 FontSize="Large"
                 FontAttributes="Bold"
                 FontFamily="ChequeRegular">
@@ -51,14 +53,14 @@
                 Text="SAVES"
                 HorizontalOptions="Center"
                 WidthRequest="200"
-                TextColor="#000000"
+                TextColor="#38b6ff"
                 FontSize="Large"
                 FontAttributes="Bold"
                 FontFamily="ChequeRegular">
                 <Button.Background>
                     <LinearGradientBrush StartPoint="0,1" EndPoint="0,-1">
-                        <GradientStop Color="#a6a6a6" Offset="0" />
-                        <GradientStop Color="#FFFFFF" Offset="0.6" />
+                        <GradientStop Color="#000000" Offset="0" />
+                        <GradientStop Color="#737373" Offset="0.6" />
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>

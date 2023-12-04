@@ -6,11 +6,8 @@
     xmlns:local="clr-namespace:CounterApp"
     Shell.FlyoutBehavior="Disabled"
     BackgroundColor="Transparent">
-    
     <ShellContent
         Title=""
-        
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
-
 </Shell>

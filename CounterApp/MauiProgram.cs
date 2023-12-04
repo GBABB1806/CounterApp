@@ -7,13 +7,11 @@ namespace CounterApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("Cheque-Regular.otf", "ChequeRegular");
-                });
+            builder.UseMauiApp<App>().ConfigureFonts(fonts =>
+            {   
+                 fonts.AddFont("Cheque-Regular.otf", "ChequeRegular");
+                 fonts.AddFont("Cheque-Black.otf", "ChequeBlack");
+            });
 
 #if DEBUG
     		builder.Logging.AddDebug();
