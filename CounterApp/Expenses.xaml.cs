@@ -14,7 +14,6 @@ public partial class Expenses : ContentPage
     public double[] spese {get;set;}
 	public Expenses()
 	{
-
         InitializeComponent();
         //Creo Variabili Accessibili alla classe VediProdotto e assegno loro dei valori
         nomi = new string[] { Nome1.Text, Nome2.Text, Nome3.Text };
@@ -30,6 +29,6 @@ public partial class Expenses : ContentPage
     /// </summary>
     private void Indietro(object sender, EventArgs e)
     {
-        App.Current.MainPage = new MainPage(); 
+        Application.Current.MainPage = new MainPage(); 
     }
 }
