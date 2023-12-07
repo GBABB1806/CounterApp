@@ -1,26 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CounterApp.Expenses">
+             xmlns:control="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             x:Class="CounterApp.Expenses"
+             xmlns:local="clr-namespace:CounterApp">
     <ScrollView>
         <ScrollView.Background>
             <LinearGradientBrush 
                 StartPoint="1,-1"
                 EndPoint="-1,1">
                 <GradientStop
-                        Color="#ab2727"
+                        Color="#2eb2bb"
                         Offset="-0.2"/>
                 <GradientStop
-                        Color="#241e92"
+                        Color="#030547"
                         Offset="1"/>
             </LinearGradientBrush>
         </ScrollView.Background>
-        <VerticalStackLayout>
+        <VerticalStackLayout x:Name="Pagina">
+            <!--Pulsante che ci consente di tornare alla pagina Home dell'App-->
             <Button
-            ImageSource="leftarrow.png"
-            BackgroundColor="Transparent"
-            HorizontalOptions="Start"
-            Padding="15"/>
+                ImageSource="leftarrow.png"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Start"
+                Clicked="Indietro"
+                Padding="15"/>
+            <!-- Grafico ad Anello con relativo titolo ed espandibilità delle parti-->
+            <control:SfCircularChart x:Name="Grafico" Margin="0,0,0,-200">
+                <control:SfCircularChart.Title>
+                    <Label Text="GRAFICO SPESE" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
+                </control:SfCircularChart.Title>
+                <control:DoughnutSeries x:Name="DGHSeries" ExplodeOnTouch="True" ShowDataLabels="True" XBindingPath="NomeSpesa" YBindingPath="Spesa">
+                </control:DoughnutSeries>
+                <control:SfCircularChart.Legend>
+                    <control:ChartLegend/>
+                </control:SfCircularChart.Legend>
+            </control:SfCircularChart>
+            <!--StackLayout con all'interno una tabella(Grid) che contiene i dati delle nostre spese-->
             <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,250,0,0">
                 <Grid BackgroundColor="#8997cf" >
                     <Grid.RowDefinitions>
@@ -32,10 +48,10 @@
                         <ColumnDefinition Width="200" />
                         <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
-                        <!-- Prima riga - Intestazioni -->
-                    <Label Grid.Row="0" Grid.Column="0" Text="Casa" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontAttributes="Bold" />
-                    <Label Grid.Row="1" Grid.Column="0" Text="Cibo" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                    <Label Grid.Row="2" Grid.Column="0" Text="Macchina" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
+                    <!-- Prima riga - Intestazioni -->
+                    <Label x:Name="Nome1" Grid.Row="0" Grid.Column="0" Text="Casa" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontAttributes="Bold" />
+                    <Label x:Name="Nome2" Grid.Row="1" Grid.Column="0" Text="Cibo" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
+                    <Label x:Name="Nome3" Grid.Row="2" Grid.Column="0" Text="Macchina" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
                     <BoxView Grid.Row="2" Grid.Column="0" HeightRequest="225" WidthRequest="1" Color="Black" Margin="0,-150,200,0" />
                     <BoxView Grid.Row="2" Grid.Column="0" HeightRequest="225" WidthRequest="1" Color="Black" Margin="0,-150,-200,0"/>
                     <BoxView Grid.Row="2" Grid.Column="1" HeightRequest="225" WidthRequest="1" Color="Black" Margin="0,-150,-100,0"/>
@@ -44,9 +60,9 @@
                     <BoxView Grid.Row="2" Grid.Column="0" HeightRequest="1" WidthRequest="300" Color="Black" Margin="0,-75,-100,0"/>
                     <BoxView Grid.Row="2" Grid.Column="0" HeightRequest="1" WidthRequest="300" Color="Black" Margin="0,75,-100,0"/>
                     <!-- Seconda riga - Dati -->
-                    <Label Grid.Row="0" Grid.Column="1" Text="-100" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                    <Label Grid.Row="1" Grid.Column="1" Text="-200" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                    <Label Grid.Row="2" Grid.Column="1" Text="-300" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
+                    <Label x:Name="Spesa1" Grid.Row="0" Grid.Column="1" Text="-100" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
+                    <Label x:Name="Spesa2" Grid.Row="1" Grid.Column="1" Text="-200" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
+                    <Label x:Name="Spesa3" Grid.Row="2" Grid.Column="1" Text="-300" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
                 </Grid>
             </StackLayout>
         </VerticalStackLayout>
