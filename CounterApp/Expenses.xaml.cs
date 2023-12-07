@@ -15,9 +15,20 @@ public partial class Expenses : ContentPage
 	public Expenses()
 	{
         InitializeComponent();
+        nomi = new string[Tabella.RowDefinitions.Count];
+        spese = new double[Tabella.RowDefinitions.Count];
         //Creo Variabili Accessibili alla classe VediProdotto e assegno loro dei valori
-        nomi = new string[] { Nome1.Text, Nome2.Text, Nome3.Text };
-        spese = new double[] { Convert.ToDouble(Spesa1.Text), Convert.ToDouble(Spesa2.Text), Convert.ToDouble(Spesa3.Text) };
+        for (int i = 0; i < Tabella.RowDefinitions.Count; i++)
+        {
+            //Qui ho la possibilità di variare la grandezza del
+            //grafico in base a quanto la tabella è lunga
+            string nomeControllo = $"nome{i}";
+            string spesaControllo = $"spesa{i}";
+            Label controlloN = Tabella.FindByName<Label>(nomeControllo);
+            Label controlloS = Tabella.FindByName<Label>(spesaControllo);
+            nomi[i] = controlloN.Text;
+            spese[i] = Convert.ToDouble(controlloS.Text);
+        }
         //Istanzio una lista di prodotti con i valori all'interno
         VediProdotto listaProdotti = new VediProdotto(nomi,spese);
         //Pesco il grafico a cui dare come sorgente i dati con queste due righe

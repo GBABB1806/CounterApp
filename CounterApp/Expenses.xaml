@@ -38,7 +38,7 @@
             </control:SfCircularChart>
             <!--StackLayout con all'interno una tabella(Grid) che contiene i dati delle nostre spese-->
             <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,250,0,0">
-                <Grid BackgroundColor="#8997cf" >
+                <Grid x:Name="Tabella" BackgroundColor="#8997cf" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="75" />
                         <RowDefinition Height="75" />
