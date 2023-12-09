@@ -7,7 +7,9 @@
     Shell.FlyoutBehavior="Disabled"
     BackgroundColor="Transparent">
     <ShellContent
-        Title=""
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+            Title=""
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" 
+            Icon="home.png"/>
+        
 </Shell>

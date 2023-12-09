@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace CounterApp 
+namespace CounterApp
 {
     /// <summary>
     /// Classe che serve per la visualizzazione del prodotto
@@ -9,15 +9,12 @@ namespace CounterApp
     /// </summary>
     internal class VediProdotto
     {
-        public ObservableCollection<Data> Prodotti {get;set;}
+        public ObservableCollection<Data> Prodotti { get; set; }
         public VediProdotto(string[] nomi, double[] spese)
         {
-            Prodotti = new ObservableCollection<Data>
-            {
-                new Data() { NomeSpesa =  nomi[0], Spesa = spese[0]},
-                new Data() { NomeSpesa =  nomi[1], Spesa = spese[1]},
-                new Data() { NomeSpesa =  nomi[2], Spesa = spese[2]},
-            };
+            Prodotti = new ObservableCollection<Data>();
+            for (int i = 0; i < nomi.Length; i++)
+                Prodotti.Add(new Data() { NomeSpesa = nomi[i], Spesa = spese[i] });
         }
     }
 }

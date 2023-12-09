@@ -9,12 +9,12 @@ namespace CounterApp
             var builder = MauiApp.CreateBuilder();
             builder.ConfigureSyncfusionCore();
             builder.UseMauiApp<App>().ConfigureFonts(fonts =>
-            {   
-                 fonts.AddFont("Cheque-Regular.otf", "ChequeRegular");
-                 fonts.AddFont("Cheque-Black.otf", "ChequeBlack");
+            {
+                fonts.AddFont("Cheque-Regular.otf", "ChequeRegular");
+                fonts.AddFont("Cheque-Black.otf", "ChequeBlack");
             });
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
             return builder.Build();
         }
