@@ -12,6 +12,7 @@ namespace CounterApp
             {
                 fonts.AddFont("Cheque-Regular.otf", "ChequeRegular");
                 fonts.AddFont("Cheque-Black.otf", "ChequeBlack");
+                fonts.AddFont("Shadow.ttf", "ShadowTitle");
             });
 #if DEBUG
             builder.Logging.AddDebug();

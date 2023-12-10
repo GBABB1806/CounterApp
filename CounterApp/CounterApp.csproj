@@ -48,23 +48,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiAsset Remove="Resources\Raw\DatabaseMaui.db" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="Resources\Fonts\Cheque-Black.otf" />
 	  <None Remove="Resources\Fonts\Cheque-Regular.otf" />
+	  <None Remove="Resources\Fonts\Shadow.ttf" />
 	  <None Remove="Resources\Images\add.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\LeftArrow.png" />
 	  <None Remove="Resources\Images\Login.png" />
 	  <None Remove="Resources\Images\settings.png" />
-	  <None Remove="Resources\Raw\DatabaseMaui.db" />
 	  <None Remove="Resources\Splash\splashapp.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <AndroidNativeLibrary Include="Resources\Raw\DatabaseMaui.db" />
 	</ItemGroup>
 
 	<ItemGroup>

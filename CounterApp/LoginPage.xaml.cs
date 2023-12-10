@@ -18,7 +18,6 @@ namespace CounterApp
         {
 
             //Recupero il path della cartella in cui si trova l'applicazione
-            bool checkData = false;
             string mainDir = FileSystem.Current.AppDataDirectory;
             string fileName = "DatabaseMaui.db";
             string bundleFileName = "DatabaseMaui.db";
@@ -73,6 +72,7 @@ namespace CounterApp
                         SELECT name
                         FROM sqlite_master
                         WHERE type='table' AND name='Utente'";
+                    
                     command.CommandText = @"SELECT email, password FROM Utente";
                     commandScrivi.CommandText = @"INSERT INTO Utente(email, password) VALUES ($email, $password);";
                     using (var reader = command.ExecuteReader())
@@ -120,10 +120,8 @@ namespace CounterApp
                             commandScrivi.Parameters.AddWithValue("$password", InputPassword.Text);
                             commandScrivi.ExecuteNonQuery();
                         }
-                    }
-                    //int rowsAffected = command.ExecuteNonQuery();
+                    }        
                 }
-                //ShowData.ItemsSource = Books;
                 App.Current.MainPage = new MainPage();
             }
             catch (Exception ex)
