@@ -77,6 +77,11 @@ namespace CounterApp
                     commandScrivi.CommandText = @"INSERT INTO Utente(email, password) VALUES ($email, $password);";
                     using (var reader = command.ExecuteReader())
                     {
+                        while (reader.Read())
+                        {
+                            Debug.WriteLine(reader.GetString(0));
+                            Debug.WriteLine(reader.GetString(1));
+                        }
                         if (reader.HasRows)
                         {
                             var checkIfExistsCommand = connection.CreateCommand();
@@ -105,6 +110,7 @@ namespace CounterApp
                             {
                                 commandScrivi.Parameters.AddWithValue("$email", InputEmail.Text);
                                 commandScrivi.Parameters.AddWithValue("$password", InputPassword.Text);
+                                commandScrivi.ExecuteNonQuery();
                             }
                         }
                         //Se non ho righe le creo col comando
@@ -112,6 +118,7 @@ namespace CounterApp
                         {
                             commandScrivi.Parameters.AddWithValue("$email", InputEmail.Text);
                             commandScrivi.Parameters.AddWithValue("$password", InputPassword.Text);
+                            commandScrivi.ExecuteNonQuery();
                         }
                     }
                     //int rowsAffected = command.ExecuteNonQuery();
