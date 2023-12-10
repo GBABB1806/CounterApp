@@ -37,8 +37,7 @@
                     <control:SfCircularChart.Title>
                         <Label Text="GRAFICO SPESE" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
                     </control:SfCircularChart.Title>
-                    <control:DoughnutSeries x:Name="DGHSeries" ExplodeOnTouch="True" ShowDataLabels="True" XBindingPath="NomeSpesa" YBindingPath="Spesa">
-                    </control:DoughnutSeries>
+                    <control:DoughnutSeries x:Name="DGHSeries" ExplodeOnTouch="True" ShowDataLabels="True" XBindingPath="NomeSpesa" YBindingPath="Spesa"/>
                     <control:SfCircularChart.Legend>
                         <control:ChartLegend/>
                     </control:SfCircularChart.Legend>
@@ -83,6 +82,9 @@
                 </StackLayout>
             </VerticalStackLayout>
         </ScrollView>
+        
+        
+        
         <VerticalStackLayout VerticalOptions="CenterAndExpand" Grid.Row="1" Margin="0,0,0,0">
             <Grid BackgroundColor="Black" VerticalOptions="EndAndExpand" Margin="0,0,0,0" HeightRequest="100">
                 <ImageButton x:Name="HomeButton" Clicked="Home" Source="home.png" BackgroundColor="Transparent" WidthRequest="75" Padding="10" HorizontalOptions="StartAndExpand"/>

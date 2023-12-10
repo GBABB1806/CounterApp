@@ -48,6 +48,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiAsset Remove="Resources\Raw\DatabaseMaui.db" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\Cheque-Black.otf" />
 	  <None Remove="Resources\Fonts\Cheque-Regular.otf" />
 	  <None Remove="Resources\Images\add.png" />
@@ -55,14 +59,21 @@
 	  <None Remove="Resources\Images\LeftArrow.png" />
 	  <None Remove="Resources\Images\Login.png" />
 	  <None Remove="Resources\Images\settings.png" />
+	  <None Remove="Resources\Raw\DatabaseMaui.db" />
 	  <None Remove="Resources\Splash\splashapp.png" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidNativeLibrary Include="Resources\Raw\DatabaseMaui.db" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="OxyPlot.Core" Version="2.1.2" />
 		<PackageReference Include="OxyPlot.Maui.Skia" Version="1.0.0" />
 		<PackageReference Include="SkiaSharp" Version="2.88.6" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.7" />
 		<PackageReference Include="Syncfusion.Maui.Charts" Version="23.2.7" />
 	</ItemGroup>
 
@@ -73,7 +84,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AggiungiElemento.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Expenses.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Saves.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
