@@ -1,4 +1,10 @@
 
+using Microsoft.Maui.Controls.Shapes;
+using System.Collections;
+using System.Collections.ObjectModel;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
+
 namespace CounterApp;
 
 /// <summary>
@@ -6,41 +12,122 @@ namespace CounterApp;
 /// </summary>
 public partial class Expenses : ContentPage
 {
-    public string[] nomi { get; set; }
-    public double[] spese { get; set; }
+
+    List<Spesa> listaSpese;
+
     public Expenses()
     {
         InitializeComponent();
-        nomi = new string[Tabella.RowDefinitions.Count];
-        spese = new double[Tabella.RowDefinitions.Count];
-        //Creo Variabili Accessibili alla classe VediProdotto e assegno loro dei valori
-        for (int i = 1; i < Tabella.RowDefinitions.Count + 1; i++)
+
+        // Inizializza la lista delle spese
+        listaSpese = App.UtenteInUso.Spesa;
+        double sommaSpese = 0;
+        if (listaSpese.Count > 0)
         {
-            //Qui ho la possibilità di variare la grandezza del
-            //grafico in base a quanto la tabella è lunga
-            string nomeControllo = $"Nome{i}";
-            string spesaControllo = $"Spesa{i}";
-            Label controlloN = Tabella.FindByName<Label>(nomeControllo);
-            Label controlloS = Tabella.FindByName<Label>(spesaControllo);
-            nomi[i - 1] = controlloN.Text;
-            spese[i - 1] = Convert.ToDouble(controlloS.Text);
+            foreach (var spesa in listaSpese)
+                sommaSpese += spesa.Valore;
+            SpesaTotale.Text = sommaSpese.ToString() + " €";
         }
-        //Istanzio una lista di prodotti con i valori all'interno
-        VediProdotto listaProdotti = new VediProdotto(nomi, spese);
-        //Pesco il grafico a cui dare come sorgente i dati con queste due righe
-        DGHSeries.ItemsSource = listaProdotti.Prodotti;
-        BindingContext = listaProdotti;
-    }
-    /// <summary>
-    /// Metodo che ci consente di tornare alla pagina precedente
-    /// </summary>
-    private void Indietro(object sender, EventArgs e)
-    {
-        Application.Current.MainPage = new MainPage();
+        // Popola la griglia con le spese esistenti
+        AggiornaGrigliaSpese();
+
     }
 
-    private void Home(object sender, EventArgs e)
+
+    // Metodo chiamato quando viene cliccato il pulsante "Aggiungi Spesa"
+    private void OnAggiungiSpesaClicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new MainPage();
+        // Passa il riferimento corrente a AggiungiElemento
+        var aggiungiElementoPage = new AggiungiElemento(this);
+        Navigation.PushModalAsync(aggiungiElementoPage);
+    }
+
+    // Metodo per aggiornare la griglia delle spese
+    public void AggiornaGrigliaSpese(Spesa spesaN)
+    {
+        double sommaSpese = 0;
+        // Pulisci lo stack layout delle spese
+        speseStackLayout.Children.Clear();
+        listaSpese.Add(spesaN);
+        // Aggiungi dinamicamente le righe per le spese
+        if (listaSpese.Count > 0)
+            foreach (var spesa in listaSpese)
+            {
+                var labelNome = new Label { Text = spesa.Nome };
+                var labelValore = new Label { Text = spesa.Valore.ToString() };
+
+                var row = new Grid
+                {
+                    ColumnDefinitions =
+                    {
+                        new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                        new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    }
+                };
+                sommaSpese += spesa.Valore;
+                row.BackgroundColor = new Color(0, 202, 220);
+                row.WidthRequest = 300;
+                row.HeightRequest = 75;
+                row.VerticalOptions = LayoutOptions.CenterAndExpand;
+                row.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                labelNome.HorizontalOptions = LayoutOptions.Center;
+                labelNome.VerticalOptions = LayoutOptions.Center;
+                labelValore.HorizontalOptions = LayoutOptions.Center;
+                labelValore.VerticalOptions = LayoutOptions.Center;
+                row.Children.Add(labelNome);
+                row.Children.Add(labelValore);
+                row.SetColumn(labelNome, 0);
+                row.SetColumn(labelValore, 1);
+                speseStackLayout.Children.Add(row);
+                speseStackLayout.Children.Add(new Label { HeightRequest = 5, BackgroundColor = new Color(0, 0, 0, 0) });
+                SpesaTotale.Text = sommaSpese.ToString() + " €";
+                App.UtenteInUso.Spesa = listaSpese;
+            }
+    }
+    public void AggiornaGrigliaSpese()
+    {
+        
+        // Pulisci lo stack layout delle spese
+        speseStackLayout.Children.Clear();
+        // Aggiungi dinamicamente le righe per le spese
+        if (listaSpese.Count > 0)
+            foreach (var spesa in listaSpese)
+            {
+                var labelNome = new Label { Text = spesa.Nome };
+                var labelValore = new Label { Text = spesa.Valore.ToString() };
+            
+                var row = new Grid
+                {
+                    ColumnDefinitions =
+                    {
+                        new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                        new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    }
+
+                };
+                row.BackgroundColor = new Color(0, 202, 220);
+                row.WidthRequest = 300;
+                row.HeightRequest = 75;
+                row.VerticalOptions = LayoutOptions.CenterAndExpand;
+                row.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                labelNome.HorizontalOptions = LayoutOptions.Center;
+                labelNome.VerticalOptions = LayoutOptions.Center;
+                labelValore.HorizontalOptions = LayoutOptions.Center;
+                labelValore.VerticalOptions = LayoutOptions.Center;
+                row.Children.Add(labelNome);
+                row.Children.Add(labelValore);
+                row.SetColumn(labelNome, 0);
+                row.SetColumn(labelValore, 1);
+                speseStackLayout.Children.Add(row);
+                speseStackLayout.Children.Add(new Label { HeightRequest = 5, BackgroundColor = new Color(0,0,0,0)});
+                App.UtenteInUso.Spesa = listaSpese;
+            
+            }
+    }
+
+    private void Indietro(object sender, EventArgs e)
+    {
+        Navigation.PopModalAsync();
+        App.Current.MainPage = new MainPage();
     }
 }

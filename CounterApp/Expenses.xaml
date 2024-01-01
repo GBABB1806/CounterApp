@@ -4,93 +4,62 @@
              xmlns:control="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              x:Class="CounterApp.Expenses"
              xmlns:local="clr-namespace:CounterApp">
-    <Grid>
-        <Grid.RowDefinitions>
-            <!-- Prima riga per il contenuto principale -->
-            <RowDefinition Height="*" />
-            <!-- Seconda riga per la barra di gestione -->
-            <RowDefinition Height="100" />
-        </Grid.RowDefinitions>
-        <ScrollView Grid.Row="0">
-            <ScrollView.Background>
-                <LinearGradientBrush 
-                StartPoint="1,-1"
-                EndPoint="-1,1">
-                    <GradientStop
-                        Color="#2eb2bb"
-                        Offset="-0.2"/>
-                    <GradientStop
-                        Color="#030547"
-                        Offset="1"/>
-                </LinearGradientBrush>
-            </ScrollView.Background>
-            <VerticalStackLayout x:Name="Pagina">
-                <!--Pulsante che ci consente di tornare alla pagina Home dell'App-->
-                <Button
+    <ScrollView>
+        
+        <StackLayout BackgroundColor="#0c134f"  HorizontalOptions="CenterAndExpand">
+            <Button
                 ImageSource="leftarrow.png"
                 BackgroundColor="Transparent"
                 HorizontalOptions="Start"
                 Clicked="Indietro"
                 Padding="15"/>
-                <!-- Grafico ad Anello con relativo titolo ed espandibilità delle parti-->
-                <control:SfCircularChart x:Name="Grafico" Margin="0,0,0,-200">
-                    <control:SfCircularChart.Title>
-                        <Label Text="GRAFICO SPESE" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
-                    </control:SfCircularChart.Title>
-                    <control:DoughnutSeries x:Name="DGHSeries" ExplodeOnTouch="True" ShowDataLabels="True" XBindingPath="NomeSpesa" YBindingPath="Spesa"/>
-                    <control:SfCircularChart.Legend>
-                        <control:ChartLegend/>
-                    </control:SfCircularChart.Legend>
-                </control:SfCircularChart>
-                <!--StackLayout con all'interno una tabella(Grid) che contiene i dati delle nostre spese-->
-                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,250,0,0" ScaleY="0.7">
-                    <Grid x:Name="Tabella" BackgroundColor="#8997cf" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="75" />
-                            <RowDefinition Height="75" />
-                            <RowDefinition Height="75" />
-                            <RowDefinition Height="75" />
-                            <RowDefinition Height="75" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="100" />
-                        </Grid.ColumnDefinitions>
-                        <!-- Prima riga - Intestazioni -->
-                        <Label x:Name="Nome1" Grid.Row="0" Grid.Column="0" Text="Casa" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontAttributes="Bold" />
-                        <Label x:Name="Nome2" Grid.Row="1" Grid.Column="0" Text="Cibo" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                        <Label x:Name="Nome3" Grid.Row="2" Grid.Column="0" Text="Macchina" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                        <Label x:Name="Nome4" Grid.Row="3" Grid.Column="0" Text="Benzina" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                        <Label x:Name="Nome5" Grid.Row="4" Grid.Column="0" Text="Negozio" FontFamily="ChequeRegular" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                        <BoxView Grid.Row="2" Grid.Column="0" HeightRequest="377" WidthRequest="2" Color="Black" Margin="0,0,200,0" />
-                        <BoxView Grid.Row="2" Grid.Column="0" HeightRequest="377.5" WidthRequest="1" Color="Black" Margin="0,0,-200,0"/>
-                        <BoxView Grid.Row="2" Grid.Column="1" HeightRequest="377.5" WidthRequest="2" Color="Black" Margin="0,0,-100,0"/>
-                        <BoxView Grid.Row="0" Grid.Column="0" HeightRequest="2" WidthRequest="300" Color="Black" Margin="0,-75,-100,0" />
-                        <BoxView Grid.Row="1" Grid.Column="0" HeightRequest="1" WidthRequest="300" Color="Black" Margin="0,-75,-100,0"/>
-                        <BoxView Grid.Row="2" Grid.Column="0" HeightRequest="1" WidthRequest="300" Color="Black" Margin="0,-75,-100,0"/>
-                        <BoxView Grid.Row="2" Grid.Column="0" HeightRequest="1" WidthRequest="300" Color="Black" Margin="0,75,-100,0"/>
-                        <BoxView Grid.Row="3" Grid.Column="0" HeightRequest="1" WidthRequest="300" Color="Black" Margin="0,-75,-100,0"/>
-                        <BoxView Grid.Row="3" Grid.Column="0" HeightRequest="1" WidthRequest="300" Color="Black" Margin="0,75,-100,0"/>
-                        <BoxView Grid.Row="4" Grid.Column="0" HeightRequest="2" WidthRequest="300" Color="Black" Margin="0,75,-100,0"/>
-                        <!-- Seconda riga - Dati -->
-                        <Label x:Name="Spesa1" Grid.Row="0" Grid.Column="1" Text="-170" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                        <Label x:Name="Spesa2" Grid.Row="1" Grid.Column="1" Text="-250" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                        <Label x:Name="Spesa3" Grid.Row="2" Grid.Column="1" Text="-320" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                        <Label x:Name="Spesa4" Grid.Row="3" Grid.Column="1" Text="-500" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                        <Label x:Name="Spesa5" Grid.Row="4" Grid.Column="1" Text="-60" FontFamily="ChequeBlack" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontAttributes="Bold" />
-                    </Grid>
-                </StackLayout>
-            </VerticalStackLayout>
-        </ScrollView>
-        
-        
-        
-        <VerticalStackLayout VerticalOptions="CenterAndExpand" Grid.Row="1" Margin="0,0,0,0">
-            <Grid BackgroundColor="Black" VerticalOptions="EndAndExpand" Margin="0,0,0,0" HeightRequest="100">
-                <ImageButton x:Name="HomeButton" Clicked="Home" Source="home.png" BackgroundColor="Transparent" WidthRequest="75" Padding="10" HorizontalOptions="StartAndExpand"/>
-                <ImageButton Source="add.png" BackgroundColor="Transparent" WidthRequest="150" Padding="10"  Margin="0,-10,0,0"/>
-                <ImageButton Source="settings.png" BackgroundColor="Transparent" WidthRequest="75" Padding="10" HorizontalOptions="EndAndExpand"/>
+            <!-- Grid per visualizzare la lista delle spese -->
+            <Grid x:Name="speseGrid" Margin="10" HorizontalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="150" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Intestazioni della griglia -->
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Text="Nome" 
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="0" 
+                       Grid.Column="1" 
+                       Text="Valore" 
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"/>
             </Grid>
-        </VerticalStackLayout>
-    </Grid>
+
+            <!-- ScrollView per la lista delle spese -->
+            <ScrollView>
+                <StackLayout x:Name="speseStackLayout" >
+                    <!-- Qui verranno aggiunte dinamicamente le righe per le spese -->
+                </StackLayout>
+            </ScrollView>
+
+            <!-- Pulsante per aggiungere una nuova spesa -->
+            <Button Text="Aggiungi una spesa" 
+                    Clicked="OnAggiungiSpesaClicked" 
+                    WidthRequest="300"
+                    Background="#00cadc"
+                    TextColor="White"
+                    CornerRadius="15"
+                    />
+            <Button x:Name="SpesaTotale" 
+                    Text="0.00 €" 
+                    BackgroundColor="#00cadc"
+                    TextColor="White"
+                    WidthRequest="300"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Margin="0,10,0,0"
+                    CornerRadius="15"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

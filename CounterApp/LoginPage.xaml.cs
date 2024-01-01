@@ -1,9 +1,47 @@
+
+/* Modifica senza merge dal progetto 'CounterApp (net7.0-ios)'
+Prima:
 using System.Diagnostics;
+Dopo:
 using Microsoft.Data.Sqlite;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+*/
+
+/* Modifica senza merge dal progetto 'CounterApp (net7.0-windows10.0.19041.0)'
+Prima:
+using System.Diagnostics;
+Dopo:
+using Microsoft.Data.Sqlite;
+*/
+
+/* Modifica senza merge dal progetto 'CounterApp (net7.0-maccatalyst)'
+Prima:
+using System.Diagnostics;
+Dopo:
+using Microsoft.Data.Sqlite;
+*/
+using System.
+/* Modifica senza merge dal progetto 'CounterApp (net7.0-ios)'
+Prima:
 using Microsoft.Maui.Controls;
-using System.Text;
+Dopo:
+using System.Diagnostics;
+*/
+
+/* Modifica senza merge dal progetto 'CounterApp (net7.0-windows10.0.19041.0)'
+Prima:
+using Microsoft.Maui.Controls;
+Dopo:
+using System.Diagnostics;
+*/
+
+/* Modifica senza merge dal progetto 'CounterApp (net7.0-maccatalyst)'
+Prima:
+using Microsoft.Maui.Controls;
+Dopo:
+using System.Diagnostics;
+*/
+Diagnostics;
+using Microsoft.Data.Sqlite;
 
 namespace CounterApp
 {
@@ -13,10 +51,16 @@ namespace CounterApp
         {
             InitializeComponent();
         }
+        public LoginPage(string input)
+        {
+            
+            InitializeComponent();
+            InputEmail.Text = input;
+        }
 
         private async void ControlloEHome(object sender, EventArgs e)
         {
-
+            Debug.WriteLine(App.UserList.Count);
             //Recupero il path della cartella in cui si trova l'applicazione
             string mainDir = FileSystem.Current.AppDataDirectory;
             string fileName = "DatabaseMaui.db";
@@ -35,7 +79,9 @@ namespace CounterApp
                         var bytesRead = 0;
 
                         int bufferSize = 1024;
+#pragma warning disable CS0168 // La variabile è dichiarata, ma non viene mai usata
                         byte[] bytes;
+#pragma warning restore CS0168 // La variabile è dichiarata, ma non viene mai usata
                         var buffer = new byte[bufferSize];
                         using (fs)
                         {
@@ -45,9 +91,7 @@ namespace CounterApp
                                 bytesRead = buffer.Count();
                                 writer.Write(buffer);
                             }
-
                             while (bytesRead > 0);
-
                         }
                     }
                 }
@@ -72,15 +116,62 @@ namespace CounterApp
                         SELECT name
                         FROM sqlite_master
                         WHERE type='table' AND name='Utente'";
-                    
+                    var commandCreaTabella = connection.CreateCommand();
+                    commandCreaTabella.CommandText = @"
+    CREATE TABLE IF NOT EXISTS 'Utente' (
+        'Pk_IdUtente' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        'Email' TEXT,
+        'Password' TEXT,
+        'FK_IdUserSaves' INTEGER,
+        'FK_IdExpenses' INTEGER,
+        FOREIGN KEY('FK_IdUserSaves') REFERENCES 'UserSaves'('PK_IdUserSaves'),
+        FOREIGN KEY('FK_IdExpenses') REFERENCES 'UserExpenses'('PK_IdExpenses')
+    );
+
+    CREATE TABLE IF NOT EXISTS 'UserExpenses' (
+        'PK_IdExpenses' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        'Macchina' INTEGER,
+        'Casa' INTEGER,
+        'Lavoro' INTEGER
+    );
+
+    CREATE TABLE IF NOT EXISTS 'UserSaves' (
+        'PK_IdUserSaves' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        'FK_IdPensione' INTEGER,
+        'FK_IdPianoAccumulo' INTEGER,
+        'FK_IdMomentiDifficili' INTEGER,
+        FOREIGN KEY('FK_IdPensione') REFERENCES 'Pensione'('PK_PensioneId')
+    );
+
+    CREATE TABLE IF NOT EXISTS 'Pensione' (
+        'PK_PensioneId' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        'Gennaio' INTEGER,
+        'Febbraio' INTEGER,
+        'Marzo' INTEGER,
+        'Aprile' INTEGER,
+        'Maggio' INTEGER,
+        'Giugno' INTEGER,
+        'Luglio' INTEGER,
+        'Agosto' INTEGER,
+        'Settembre' INTEGER,
+        'Ottobre' INTEGER,
+        'Novembre' INTEGER,
+        'Dicembre' INTEGER
+    );
+";
+                    commandCreaTabella.ExecuteNonQuery();
                     command.CommandText = @"SELECT email, password FROM Utente";
                     commandScrivi.CommandText = @"INSERT INTO Utente(email, password) VALUES ($email, $password);";
-                    using (var reader = command.ExecuteReader())
+                    App.UtenteInUso.Email = InputEmail.Text;
+                    App.UtenteInUso.Password = InputPassword.Text;
+                    using (var reader = commandUtVerifica.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Debug.WriteLine(reader.GetString(0));
-                            Debug.WriteLine(reader.GetString(1));
+                            if (!reader.HasRows)
+                            {
+
+                            }
                         }
                         if (reader.HasRows)
                         {
@@ -94,16 +185,24 @@ namespace CounterApp
                             checkIfExistsCommand.Parameters.AddWithValue("$email", InputEmail.Text);
                             checkIfExistsCommand.Parameters.AddWithValue("$password", InputPassword.Text);
                             int countE = Convert.ToInt32(checkIfExistsCommand.ExecuteScalar());
+                            
 
                             // Credenziali Valide
                             if (countE > 0)
                             {
-                                Console.WriteLine("Il valore è già presente nella tabella.");
+                                Debug.WriteLine("Il valore è già presente nella tabella.");
                                 var controllaPassword = connection.CreateCommand();
                                 controllaPassword.CommandText = @"
-                                SELECT COUNT (*)
-                                FROM Utente
-                                WHERE Password";
+                                SELECT PK_IdUtente, email, password, FK_IdUserSaves
+                                FROM Utente";
+                                using (var leggiUtenti = controllaPassword.ExecuteReader())
+                                {
+                                    while (leggiUtenti.Read())
+                                    {
+                                        Debug.WriteLine("Email: " + leggiUtenti.GetString(0) + "\n Password: " + leggiUtenti.GetString(1));
+                                    }
+                                }
+                                Application.Current.MainPage = new MainPage();
                             }
                             //Credenziali non valide
                             else
@@ -111,18 +210,17 @@ namespace CounterApp
                                 commandScrivi.Parameters.AddWithValue("$email", InputEmail.Text);
                                 commandScrivi.Parameters.AddWithValue("$password", InputPassword.Text);
                                 commandScrivi.ExecuteNonQuery();
+                                await Navigation.PushModalAsync(new AggiungiElemento(new Saves()));
                             }
                         }
                         //Se non ho righe le creo col comando
                         else
                         {
-                            commandScrivi.Parameters.AddWithValue("$email", InputEmail.Text);
-                            commandScrivi.Parameters.AddWithValue("$password", InputPassword.Text);
-                            commandScrivi.ExecuteNonQuery();
+
                         }
-                    }        
+                    }
                 }
-                App.Current.MainPage = new MainPage();
+
             }
             catch (Exception ex)
             {
@@ -145,5 +243,13 @@ namespace CounterApp
 
             await streamWriter.WriteAsync(content);
         }
-    }   
+
+        private void MostraPassword(object sender, CheckedChangedEventArgs e)
+        {
+            if(VediPwd.IsChecked == true)
+                InputPassword.IsPassword = false;
+            else 
+                InputPassword.IsPassword = true;
+        }
+    }
 }

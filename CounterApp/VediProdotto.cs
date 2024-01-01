@@ -16,5 +16,9 @@ namespace CounterApp
             for (int i = 0; i < nomi.Length; i++)
                 Prodotti.Add(new Data() { NomeSpesa = nomi[i], Spesa = spese[i] });
         }
+        public VediProdotto()
+        {
+            Prodotti = new ObservableCollection<Data>();  
+        }
     }
 }

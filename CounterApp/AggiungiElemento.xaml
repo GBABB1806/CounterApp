@@ -2,19 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CounterApp.AggiungiElemento">
-    <ScrollView>
-        <ScrollView.Background>
-            <LinearGradientBrush 
-    StartPoint="1,-1"
-    EndPoint="-1,1">
-                <GradientStop
-            Color="#2eb2bb"
-            Offset="-0.2"/>
-                <GradientStop
-            Color="#030547"
-            Offset="1"/>
-            </LinearGradientBrush>
-        </ScrollView.Background>
+    <ScrollView BackgroundColor="#0b2447">
         <VerticalStackLayout>
             <Button
             ImageSource="leftarrow.png"
@@ -23,8 +11,12 @@
             Clicked="Indietro"
             Padding="15"/>
             <VerticalStackLayout>
-                <Grid x:Name="GrigliaAgginta">
+                <Grid x:Name="GrigliaAggiunta" 
+                      HorizontalOptions="Center" 
+                      Margin="20,200,0,0"
+                      VerticalOptions="Center">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
@@ -33,16 +25,22 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Text="Cosa Vuoi Aggiungere"/>
+                    <Label Grid.Row="0"
+                           Grid.Column="0" 
+                           Text="Cosa Vuoi Aggiungere"
+                           />
                     <Picker 
-                    Grid.Row="1"
-                    SelectedIndexChanged="SceltaTipo"
-                    HorizontalOptions="Center" 
-                    x:Name="sceltaTipo" 
-                    WidthRequest="200" 
-                    HeightRequest="34"
-                    HorizontalTextAlignment="Center"
-                    BackgroundColor="White">
+                        Grid.Row="0" Grid.Column="1"
+                        SelectedIndexChanged="SceltaTipo"
+                        HorizontalOptions="Center" 
+                        x:Name="sceltaTipo" 
+                        WidthRequest="200" 
+                        HeightRequest="40"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        VerticalOptions="Center"
+                        Margin="0,0,0,10"
+                        BackgroundColor="#5c469c">
                         <Picker.ItemsSource TextColor="#440080">
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Expense</x:String>
@@ -51,12 +49,48 @@
                             </x:Array>
                         </Picker.ItemsSource>
                         <Picker.TextColor>
-                            <Color>#440080</Color>
+                            <Color>#ffffff</Color>
                         </Picker.TextColor>
                     </Picker>
+                    <Picker 
+                        Grid.Row="1" Grid.ColumnSpan="2"
+                        SelectedIndexChanged="CambiaRisparmio"
+                        HorizontalOptions="Center" 
+                        x:Name="PickerSaves"
+                        IsVisible="false"
+                        WidthRequest="200" 
+                        HeightRequest="34"
+                        HorizontalTextAlignment="Center"
+                        BackgroundColor="#5c469c">
+                        <Picker.ItemsSource TextColor="#440080">
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Pensione</x:String>
+                                <x:String>Piano di accumulo</x:String>
+                                <x:String>Momenti difficili</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                        <Picker.TextColor>
+                            <Color>#ffffff</Color>
+                        </Picker.TextColor>
+                    </Picker>
+                    <Entry
+                        Placeholder="Inserisci il nome della spesa"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1"
+                        x:Name="NomeSpesa"
+                        TextChanged="CambiaSpesa"
+                        IsVisible="false"/>
+                    <Button x:Name="Conferma" Grid.Row="3" IsVisible="False" Text="Conferma" Clicked="Invia"/>
+                    <Entry
+                        Placeholder="Inserisci il valore"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="2"
+                        x:Name="Valore"
+                        TextChanged="InserisciValore"
+                        IsVisible="false"/>
                 </Grid>
             </VerticalStackLayout>
-            <Button Text="Conferma" Clicked="Button_Clicked"/>
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -2,22 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:control="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              x:Class="CounterApp.MainPage">
-    <ScrollView>
-        <ScrollView.Background>
-            <LinearGradientBrush
-                    EndPoint="1,-1"
-                    StartPoint="-1, 1">
-                <GradientStop
-                        Color="#2eb2bb"
-                        Offset="-0.2"/>
-                <GradientStop
-                        Color="#030547"
-                        Offset="1"/>
-            </LinearGradientBrush>
-        </ScrollView.Background>
-        <VerticalStackLayout>
-            <ImageButton 
+    <VerticalStackLayout BackgroundColor="#0b2447">
+        <ImageButton 
                 Source="Login.png"
                 Clicked="Login"
                 HorizontalOptions="EndAndExpand"
@@ -27,13 +15,30 @@
                 MinimumHeightRequest="75"
                 MaximumHeightRequest="75"
                 BackgroundColor="Transparent"/>
-            <VerticalStackLayout
-            Spacing="25"
-            Padding="45,100"
-            VerticalOptions="CenterAndExpand">
+        <VerticalStackLayout
+                VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand">
+            <Grid   VerticalOptions="StartAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    ScaleX=".8">
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
                 <Label
+                    x:Name="Soldi"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="3"
+                    VerticalOptions="Center"
                     Text="0.00 €"
+                    Margin="0,0,0,10"
                     SemanticProperties.HeadingLevel="Level1"
                     FontAttributes="Bold"
                     TextColor="#9d0000"
@@ -41,69 +46,112 @@
                     HorizontalOptions="Center"
                     FontFamily="ChequeBlack"/>
                 <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    CornerRadius="20"
                     x:Name = "Spese"
-                    Text="EXPENSES"
+                    Text="EXPENSE"
                     HorizontalOptions="Center"
-                    WidthRequest="200"
-                    TextColor="#38b6ff"
+                    WidthRequest="120"
+                    TextColor="#0c134f"
                     Clicked="Spese_Clicked"
-                    Margin="0,50,0,0"
-                    FontSize="Large"
-                    FontAttributes="Bold"
-                    FontFamily="ChequeRegular">
-                    <Button.Background>
-                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,-1">
-                            <GradientStop Color="#000000" Offset="0" />
-                            <GradientStop Color="#737373" Offset="0.6" />
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
+                    FontSize="Default"
+                    FontFamily="Classic"/>
                 <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
                     x:Name = "Risparmi"
-                    Text="SAVES"
+                    CornerRadius="20"
+                    Text="SAVE"
                     HorizontalOptions="Center"
-                    WidthRequest="200"
-                    TextColor="#38b6ff"
+                    WidthRequest="100"
+                    TextColor="#0c134f"
                     Clicked="Saves_Clicked"
-                    FontSize="Large"
-                    FontAttributes="Bold"
-                    FontFamily="ChequeRegular">
-                    <Button.Background>
-                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,-1">
-                            <GradientStop Color="#000000" Offset="0" />
-                            <GradientStop Color="#737373" Offset="0.6" />
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-
+                    FontSize="Default"
+                    FontFamily="Classic"/>
                 <Button
-                x:Name="Investimenti"
-                Text="INVEST"
-                HorizontalOptions="Center"
-                WidthRequest="200"
-                TextColor="#38b6ff"
-                FontAttributes="Bold"
-                FontSize="Large"
-                FontFamily="ChequeRegular">
-                    <Button.Background>
-                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,-1">
-                            <GradientStop Color="#000000" Offset="0" />
-                            <GradientStop Color="#737373" Offset="0.6" />
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    CornerRadius="20"
+                    x:Name="Investimenti"
+                    Text="INVEST"
+                    HorizontalOptions="Center"
+                    WidthRequest="100"
+                    TextColor="#0c134f"
+                    FontSize="Default"
+                    FontFamily="Classic"/>
 
-            </VerticalStackLayout>
-            <ScrollView>
-                <VerticalStackLayout VerticalOptions="CenterAndExpand">
-                    <Grid BackgroundColor="Black" VerticalOptions="EndAndExpand" Margin="0,81.9,0,0" HeightRequest="100">
-                        <ImageButton Source="home.png" Clicked="Home" BackgroundColor="Transparent" WidthRequest="75" Padding="10" HorizontalOptions="StartAndExpand"/>
-                        <ImageButton Source="add.png" Clicked="Aggiungi" BackgroundColor="Transparent" WidthRequest="150" Padding="10"  Margin="0,-10,0,0"/>
-                        <ImageButton Source="settings.png" BackgroundColor="Transparent" WidthRequest="75" Padding="10" HorizontalOptions="EndAndExpand"/>
+                <Border
+                   WidthRequest="420"
+                   HeightRequest="1000"
+                   Grid.ColumnSpan="3"
+                   Grid.Row="2"
+                   Margin="0,30,0,0"
+                   BackgroundColor="#5c469c">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="30"/>
+                    </Border.StrokeShape>
+                    <Grid x:Name="GriglaAggiungi">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <control:SfCircularChart x:Name="Grafico"
+                                                 Grid.Row="0"
+                                                 WidthRequest="300"
+                                                 HeightRequest="300">
+
+                            <control:PieSeries x:Name="GraficoTorta" 
+                                               ShowDataLabels="True" 
+                                               XBindingPath="NomeSpesa" 
+                                               YBindingPath="Spesa"/>
+                            <control:SfCircularChart.Legend>
+                                <control:ChartLegend/>
+                            </control:SfCircularChart.Legend>
+                        </control:SfCircularChart>
+                        <Button 
+                            Grid.Row="1"
+                            WidthRequest="300"
+                            HeightRequest="50"
+                            BackgroundColor="#0b2447"
+                            TextColor="White"
+                            CornerRadius="20"
+                            Margin="0,10,0,10"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            FontFamily="Classic"
+                            Text="Risparmi più grandi"/>
+                        <Button
+                            Grid.Row="2"
+                            WidthRequest="300"
+                            HeightRequest="50"
+                            BackgroundColor="#00cadc"
+                            TextColor="White"
+                            CornerRadius="20"
+                            Margin="0,10,0,10"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            Clicked="SpesaPiùGrande_Clicked"
+                            FontFamily="Classic"
+                            Text="Spesa più grande"/>
+                        <Button
+                            Grid.Row="3"
+                            WidthRequest="300"
+                            HeightRequest="50"
+                            BackgroundColor="#8997cf"
+                            TextColor="White"
+                            CornerRadius="20"
+                            Margin="0,10,0,10"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            FontFamily="Classic"
+                            Text="Investimento più grande"/>
                     </Grid>
-                </VerticalStackLayout>
-            </ScrollView>
+                </Border>
+            </Grid>
         </VerticalStackLayout>
-    </ScrollView>
+    </VerticalStackLayout>
 
 </ContentPage>
