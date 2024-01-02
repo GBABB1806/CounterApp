@@ -12,7 +12,7 @@ public partial class Saves : ContentPage
         ora= DateTime.Now;
         unAnnoFa= ora.AddYears(-1);
         InitializeComponent();
-        ViewModel vM = new ViewModel(App.UtenteInUso.Risparmio);
+        ViewModel vM = new ViewModel(App.UtenteInUso.Risparmi);
         var primaryAxis = new DateTimeAxis()
         {
             
@@ -25,24 +25,24 @@ public partial class Saves : ContentPage
         Grafico.XAxes.Add(primaryAxis);
         NumericalAxis secondaryAxis = new NumericalAxis();
         secondaryAxis.Minimum = 0;
-        secondaryAxis.Maximum = App.UtenteInUso.Risparmio.Pensione.Max();
+        secondaryAxis.Maximum = App.UtenteInUso.Risparmi.Pensione.Max();
         Grafico.YAxes.Add(secondaryAxis);
-        GraficoColonne.ItemsSource = vM.PensionSavings;
+        //GraficoColonne.ItemsSource = vM.PensionSavings;
         GraficoColonne.XBindingPath = "Months";
         GraficoColonne.YBindingPath = "Savings";
         GraficoColonne.Spacing = 1;
         GraficoColonne.Width = 0.7;
-        BindingContext = vM;
+        //BindingContext = vM;
         Grafico2.YAxes.Add(secondaryAxis);
         Grafico2.XAxes.Add(primaryAxis);
-        GraficoColonne2.ItemsSource = vM.PensionSavings;
+        //GraficoColonne2.ItemsSource = vM.PensionSavings;
         GraficoColonne2.XBindingPath = "Months";
         GraficoColonne2.YBindingPath = "Savings";
         GraficoColonne2.Spacing = 1;
         GraficoColonne2.Width = 0.7;
         Grafico3.YAxes.Add(secondaryAxis);
         Grafico3.XAxes.Add(primaryAxis);
-        GraficoColonne3.ItemsSource = vM.PensionSavings;
+        //GraficoColonne3.ItemsSource = vM.PensionSavings;
         GraficoColonne3.XBindingPath = "Months";
         GraficoColonne3.YBindingPath = "Savings";
         GraficoColonne3.Spacing = 1;

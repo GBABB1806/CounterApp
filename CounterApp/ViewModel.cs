@@ -21,8 +21,8 @@ namespace CounterApp
             Utente utente = App.UtenteInUso;
             for (int i = 0; i < 12; i++)
             {
-                PensionSavings.Add(new Model() { Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1).Substring(0, 3), Savings = App.UtenteInUso.Risparmio.Pensione[i] });
-                EmergencySavings.Add(new Model() { Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1).Substring(0, 3), Savings = App.UtenteInUso.Risparmio.MomentiDifficili[i] });
+                PensionSavings.Add(new Model() { Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1).Substring(0, 3), Savings = App.UtenteInUso.Risparmi.Pensione[i] });
+                EmergencySavings.Add(new Model() { Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i + 1).Substring(0, 3), Savings = App.UtenteInUso.Risparmi.MomentiDifficili[i] });
             }
         }
         public ViewModel(Risparmio risparmio)

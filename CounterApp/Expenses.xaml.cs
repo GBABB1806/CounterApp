@@ -20,7 +20,7 @@ public partial class Expenses : ContentPage
         InitializeComponent();
 
         // Inizializza la lista delle spese
-        listaSpese = App.UtenteInUso.Spesa;
+        listaSpese = App.UtenteInUso.Spese;
         double sommaSpese = 0;
         if (listaSpese.Count > 0)
         {
@@ -30,7 +30,10 @@ public partial class Expenses : ContentPage
         }
         // Popola la griglia con le spese esistenti
         AggiornaGrigliaSpese();
-
+        if(listaSpese.Count is 0)
+        {
+            EliminaSpese.IsEnabled = false;
+        }
     }
 
 
@@ -81,7 +84,7 @@ public partial class Expenses : ContentPage
                 speseStackLayout.Children.Add(row);
                 speseStackLayout.Children.Add(new Label { HeightRequest = 5, BackgroundColor = new Color(0, 0, 0, 0) });
                 SpesaTotale.Text = sommaSpese.ToString() + " €";
-                App.UtenteInUso.Spesa = listaSpese;
+                App.UtenteInUso.Spese = listaSpese;
             }
     }
     public void AggiornaGrigliaSpese()
@@ -120,7 +123,7 @@ public partial class Expenses : ContentPage
                 row.SetColumn(labelValore, 1);
                 speseStackLayout.Children.Add(row);
                 speseStackLayout.Children.Add(new Label { HeightRequest = 5, BackgroundColor = new Color(0,0,0,0)});
-                App.UtenteInUso.Spesa = listaSpese;
+                App.UtenteInUso.Spese = listaSpese;
             
             }
     }
@@ -130,4 +133,29 @@ public partial class Expenses : ContentPage
         Navigation.PopModalAsync();
         App.Current.MainPage = new MainPage();
     }
+
+    private async void OnEliminaSpesaClicked(object sender, EventArgs e)
+    {
+        string nomeSpesaDaEliminare = await PromptDialog("Elimina Spesa", "Inserisci il nome della Spesa da eliminare:");
+
+        // Trova e rimuovi la spesa dalla lista o dal tuo oggetto Utente
+        if (App.UtenteInUso != null && App.UtenteInUso.Spese != null)
+        {
+            var spesaDaEliminare = App.UtenteInUso.Spese.FirstOrDefault(s => s.Nome == nomeSpesaDaEliminare);
+            if (spesaDaEliminare != null)
+            {
+                App.UtenteInUso.Spese.Remove(spesaDaEliminare);
+                await Navigation.PopModalAsync();
+                App.Current.MainPage = new Expenses();
+                // Ora puoi aggiornare l'oggetto Utente in modo permanente o salvare le modifiche
+                // a seconda della tua architettura e della logica di salvataggio dati.
+            }
+        }
+    }
+
+    private async Task<string> PromptDialog(string title, string message)
+    {
+        return await Application.Current.MainPage.DisplayPromptAsync(title, message);
+    }
+
 }

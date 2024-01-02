@@ -1,36 +1,33 @@
-﻿using Syncfusion.Maui.Charts;
+﻿#if ANDROID
+using Android.Preferences;
+#endif
+using Syncfusion.Maui.Charts;
+using Microsoft.Maui.Controls;
+using System.Text.Json;
 
 namespace CounterApp
 {
     public partial class MainPage : ContentPage
     {
-
+        public DateTime Ora {  get; set; }
         public MainPage()
         {
+            Utente utente = App.UtenteInUso;
+            Ora = DateTime.Now;
             InitializeComponent();
             VediProdotto listaDati = new VediProdotto();
             listaDati.Prodotti.Add(new Data());
             listaDati.Prodotti.Add(new Data() { NomeSpesa = "Risparmi", Spesa = 0});
             listaDati.Prodotti[0].NomeSpesa = "Spese";
-            for (int i = 0; i < App.UtenteInUso.Spesa.Count; i++)
-            {
-                listaDati.Prodotti[0].Spesa += App.UtenteInUso.Spesa[i].Valore;
-            }
-            for(int i = 0; i < App.UtenteInUso.Risparmio.Pensione.Length; i++)
-            {
-                listaDati.Prodotti[1].Spesa += App.UtenteInUso.Risparmio.Pensione[i];
-            }
-            for(int i = 0; i < App.UtenteInUso.Risparmio.PianoAccumulo.Length; i++)
-            {
-                listaDati.Prodotti[1].Spesa += App.UtenteInUso.Risparmio.PianoAccumulo[i];
-            }
-            for(int i = 0; i < App.UtenteInUso.Risparmio.MomentiDifficili.Length; i++)
-            {
-                listaDati.Prodotti[1].Spesa += App.UtenteInUso.Risparmio.MomentiDifficili[i];
-            }
+            for (int i = 0; i < App.UtenteInUso.Spese.Count; i++)
+                listaDati.Prodotti[0].Spesa += App.UtenteInUso.Spese[i].Valore;                        
+            listaDati.Prodotti[1].Spesa += App.UtenteInUso.Risparmi.Pensione[Ora.Month-1];            
+            listaDati.Prodotti[1].Spesa += App.UtenteInUso.Risparmi.PianoAccumulo[Ora.Month-1];
+            listaDati.Prodotti[1].Spesa += App.UtenteInUso.Risparmi.MomentiDifficili[Ora.Month-1];           
             GraficoTorta.ItemsSource = listaDati.Prodotti;
             BindingContext = listaDati;
             AggiornaSoldi();
+            App.SalvaDatoUtente(App.UtenteInUso);
         }
         private void Spese_Clicked(object sender, EventArgs e)
         {
@@ -51,24 +48,27 @@ namespace CounterApp
         public void AggiornaSoldi()
         {
             var denaroTotale = 0.0;
-            foreach (var spesa in App.UtenteInUso.Spesa)
+            foreach (var spesa in App.UtenteInUso.Spese)
             {
                 denaroTotale -= spesa.Valore;
             }
-            foreach(var risparmio in App.UtenteInUso.Risparmio.Pensione)
-            {
-                denaroTotale += risparmio;
-            }
-            foreach (var risparmio in App.UtenteInUso.Risparmio.PianoAccumulo)
-            {
-                denaroTotale += risparmio;
-            }
-            foreach (var risparmio in App.UtenteInUso.Risparmio.MomentiDifficili)
-            {
-                denaroTotale += risparmio;
-            }
+            denaroTotale += App.UtenteInUso.Risparmi.Pensione[Ora.Month-1];   
+            denaroTotale += App.UtenteInUso.Risparmi.MomentiDifficili[Ora.Month-1];   
+            denaroTotale += App.UtenteInUso.Risparmi.PianoAccumulo[Ora.Month-1];   
+           
             Soldi.Text = Convert.ToDouble(denaroTotale).ToString() + " €";
+            if(Convert.ToDouble(denaroTotale)>0)
+                Soldi.TextColor = new Color(0, 255, 0);
+            else 
+                Soldi.TextColor = new Color(255, 0, 0);
+            
         }
+
+        private void RisparmioPiùGrande_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new AggiungiElemento( new Saves(), false));
+        }
+
     }
 
 }

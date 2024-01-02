@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace CounterApp
 {
@@ -35,6 +36,8 @@ namespace CounterApp
             UserList = DownloadUserListFromDatabase();
             UtenteInUso = new Utente();
             MainPage = new AppShell();
+            if(RecuperaDatoUtente() != null)
+                UtenteInUso = RecuperaDatoUtente();
         }
         private List<Utente> DownloadUserListFromDatabase()
         {
@@ -72,6 +75,34 @@ namespace CounterApp
                 Debug.WriteLine(ex.Message);
             }
             return listaDati;
+        }
+        public static Utente RecuperaDatoUtente()
+        {
+            string datiSerializzati = Preferences.Get("ChiaveUtente", null);
+            try
+            {
+                if (datiSerializzati != null)
+                {
+                    var options = new JsonSerializerOptions
+                    {
+                        IncludeFields = true
+                    };
+                    return JsonSerializer.Deserialize<Utente>(datiSerializzati, options);
+                    //return JsonSerializer.Deserialize<Utente>(datiSerializzati);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Errore durante la deserializzazione: {ex.Message}");
+                throw;
+            }
+            return null; // o un valore predefinito, a seconda del tuo scenario
+        }
+
+        public static void SalvaDatoUtente(Utente utente)
+        {
+            string datiSerializzati = JsonSerializer.Serialize(utente);
+            Preferences.Set("ChiaveUtente", datiSerializzati);
         }
     }
 }

@@ -14,6 +14,10 @@ namespace CounterApp
         {
             
             InitializeComponent();
+            if(App.UtenteInUso.Password!= null || App.UtenteInUso.Password!= null)
+            {
+                App.Current.MainPage = new MainPage();
+            }
             InputEmail.Text = input;
         }
 
@@ -165,7 +169,7 @@ namespace CounterApp
                                     commandScrivi.Parameters.AddWithValue("$email", InputEmail.Text);
                                     commandScrivi.Parameters.AddWithValue("$password", InputPassword.Text);
                                     commandScrivi.ExecuteNonQuery();
-                                    await Navigation.PushModalAsync(new AggiungiElemento(new Saves()));
+                                    await Navigation.PushModalAsync(new AggiungiElemento(new Saves(), true));
                                 }
                             }
                             //Se non ho righe le creo col comando

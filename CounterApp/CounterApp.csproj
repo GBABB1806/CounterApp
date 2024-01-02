@@ -15,7 +15,7 @@
 		<ApplicationTitle>CounterApp</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.2.counterapp</ApplicationId>
+		<ApplicationId>com.companyname.3.counterapp</ApplicationId>
 		<ApplicationIdGuid>bacd3793-fc91-41db-93c9-b136dea55190</ApplicationIdGuid>
 
 		<!-- Versions -->

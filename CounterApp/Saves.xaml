@@ -106,6 +106,7 @@
                         BackgroundColor="#8997cf"
                         TextColor="White"
                         Margin="10,210,0,0"/>
+                
                 <control:SfCartesianChart x:Name="Grafico"
                                           Grid.Row="0"
                                           Grid.Column="1"
@@ -113,8 +114,13 @@
                                           HeightRequest="400"
                                           BackgroundColor="#00cadc"
                                           Margin="0,0,0,10">
+                    <control:SfCartesianChart.BindingContext>
+                        <local:ViewModel/>
+                    </control:SfCartesianChart.BindingContext>
+                    
                     <control:ColumnSeries x:Name="GraficoColonne" 
-                                          ShowDataLabels="True" 
+                                          ShowDataLabels="True"
+                                          ItemsSource="{Binding PensionSavings}"
                                           XBindingPath="NomeSpesa" 
                                           YBindingPath="Spesa">
                         

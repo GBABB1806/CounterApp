@@ -1,13 +1,14 @@
 using Microsoft.Data.Sqlite;
 using System.Collections;
 using System.Diagnostics;
+using System.Globalization;
 using System.Transactions;
 
 namespace CounterApp;
 
 public partial class AggiungiElemento : ContentPage
 {
-   
+    public DateTime Ora {  get; set; }
     private string _tabellaAggiungere;
     private string _valoreInserito;
     private string _nomeCampo;
@@ -15,11 +16,13 @@ public partial class AggiungiElemento : ContentPage
     public AggiungiElemento()
     {
         InitializeComponent();
+        App.SalvaDatoUtente(App.UtenteInUso);
     }
     private Expenses ExpensesPage; // Aggiungi campo per riferimento
     public AggiungiElemento(Expenses expenses)
     {
         InitializeComponent();
+        App.SalvaDatoUtente(App.UtenteInUso);
         sceltaTipo.IsEnabled = false;
         sceltaTipo.SelectedIndex = 0;
         NomeSpesa.IsVisible = true;
@@ -29,6 +32,7 @@ public partial class AggiungiElemento : ContentPage
     public AggiungiElemento(Expenses expenses, int a)
     {
         InitializeComponent();
+        App.SalvaDatoUtente(App.UtenteInUso);
         sceltaTipo.IsEnabled = false;
         sceltaTipo.SelectedIndex = 0;
         NomeSpesa.IsVisible = true;
@@ -37,14 +41,17 @@ public partial class AggiungiElemento : ContentPage
         _parametrocontrollo = a;
     }
 
-    public AggiungiElemento(Saves saves)
+    public AggiungiElemento(Saves saves, bool n)
     {
         InitializeComponent();
         sceltaTipo.IsEnabled = false;
         sceltaTipo.SelectedIndex = 1;
         PickerSaves.IsVisible = true;
-        PickerSaves.IsEnabled = false;
-        PickerSaves.SelectedIndex = 0;
+        if (n == true)
+        {
+            PickerSaves.IsEnabled = false;
+            PickerSaves.SelectedIndex = 0;
+        }
         //Valore.IsVisible = true;
     }
 
@@ -63,16 +70,8 @@ public partial class AggiungiElemento : ContentPage
                 _tabellaAggiungere = "Saves";
                 break;
             case 2:
-                //Picker aggiungiSpesa3 = new Picker();
-                //aggiungiSpesa3.Items.Add("Casa");
-                //aggiungiSpesa3.Items.Add("Cibo");
-                //aggiungiSpesa3.Items.Add("Macchina");
-                //GrigliaAggiunta.SetRow(aggiungiSpesa3, 1);
-                //GrigliaAggiunta.SetColumnSpan(aggiungiSpesa3 , 2);
-                //aggiungiSpesa3.SelectedIndexChanged += CambiaSpesa;
-                //GrigliaAggiunta.Add(aggiungiSpesa3);
+                _tabellaAggiungere = "Investimenti";
                 break;
-
         }
 
     }
@@ -92,7 +91,7 @@ public partial class AggiungiElemento : ContentPage
     public void Valore_TextChanged(object sender, TextChangedEventArgs e)
     {
         _valoreInserito = Valore.Text;
-
+        
         Conferma.IsVisible = true;
     }
 
@@ -127,12 +126,14 @@ public partial class AggiungiElemento : ContentPage
     private void InserisciValore(object sender, TextChangedEventArgs e)
     {
         Entry entry = (Entry)sender;
+        entry.Keyboard = Keyboard.Numeric;
         _valoreInserito = entry.Text;
         Conferma.IsVisible = true;
     }
     private void Indietro(object sender, EventArgs e)
     {
         Navigation.PopModalAsync();
+        App.SalvaDatoUtente(App.UtenteInUso);
     }
     private void Invia(object sender, EventArgs e)
     {
@@ -157,8 +158,15 @@ public partial class AggiungiElemento : ContentPage
             }
             else if( sceltaTipo.SelectedIndex == 1)
             {
-                for (int i = 0; i < App.UtenteInUso.Risparmio.Pensione.Length; i++)
-                    App.UtenteInUso.Risparmio.Pensione[i] = valoreInserito;
+                if(_nomeCampo == "Pensione")
+                    for (int i = 0; i < App.UtenteInUso.Risparmi.Pensione.Length; i++)
+                        App.UtenteInUso.Risparmi.Pensione[i] = valoreInserito;
+                if (_nomeCampo == "PianoAccumulo")
+                    App.UtenteInUso.Risparmi.PianoAccumulo[Ora.Month - 1] += valoreInserito;
+                if (_nomeCampo == "MomentiDifficili")
+                    App.UtenteInUso.Risparmi.MomentiDifficili[Ora.Month - 1] += valoreInserito;
+                App.SalvaDatoUtente(App.UtenteInUso);
+                App.Current.MainPage = new MainPage();
             }
         }
         else
@@ -264,6 +272,7 @@ public partial class AggiungiElemento : ContentPage
                     }
                 }   
             }
+            App.SalvaDatoUtente(App.UtenteInUso);
         }
         catch (Exception ex)
         {

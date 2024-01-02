@@ -121,6 +121,7 @@
                             Margin="0,10,0,10"
                             FontAttributes="Bold"
                             FontSize="20"
+                            Clicked="RisparmioPiùGrande_Clicked"
                             FontFamily="Classic"
                             Text="Risparmi più grandi"/>
                         <Button
