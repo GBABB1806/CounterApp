@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CounterApp.InvestimentPage"
+             Title="InvestimentPage">
+    <ScrollView BackgroundColor="#0c134f">
+        <VerticalStackLayout BackgroundColor="#0c134f" HorizontalOptions="Center" VerticalOptions="Center">
+            <!-- Label per il valore di partenza -->
+            <Label x:Name="startValueLabel" Text="Inserisci il valore di base dei bitcoin" />
+            <Entry x:Name="ValoreInInput" Text="1" Keyboard="Numeric" TextChanged="CambiamentoSoldi"/>
+
+
+            <!-- Label per la variazione -->
+            <Label x:Name="variationLabel" Text="Numero di BitCoin: " />
+            <Label x:Name="NuovoValore" Text="Nuovo Valore: "/>
+
+
+            <Label x:Name="startValueLabel2" Text="Inserisci il valore di base di quote sul mercato" />
+            <Entry x:Name="ValoreInInput2" Text="1" Keyboard="Numeric" TextChanged="CambiamentoSoldi2"/>
+            <!-- Label per la variazione -->
+            <Label x:Name="variationLabel2" Text="Numero di Quote sul mercato: " />
+            <Label x:Name="NuovoValore2" Text="Nuovo Valore: "/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

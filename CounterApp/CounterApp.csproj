@@ -62,6 +62,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="OxyPlot.Core" Version="2.1.2" />
 		<PackageReference Include="OxyPlot.Maui.Skia" Version="1.0.0" />
 		<PackageReference Include="SkiaSharp" Version="2.88.6" />
@@ -73,6 +74,12 @@
 	  <Compile Update="Expenses.xaml.cs">
 	    <DependentUpon>Expenses.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="PaginaAccumulo.xaml.cs">
+	    <DependentUpon>PaginaAccumulo.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="PaginaMomDifficili.xaml.cs">
+	    <DependentUpon>PaginaMomDifficili.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -82,7 +89,19 @@
 	  <MauiXaml Update="Expenses.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="InvestimentPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PaginaAccumulo.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PaginaMomDifficili.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PaginaPensione.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Saves.xaml">

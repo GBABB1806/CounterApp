@@ -1,5 +1,7 @@
+using Microsoft.Maui.Platform;
 using Syncfusion.Maui.Charts;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace CounterApp;
 
@@ -7,54 +9,67 @@ public partial class Saves : ContentPage
 {
     public DateTime ora { get; set; }
     public DateTime unAnnoFa { get; set; }
+    public Utente Utente { get; set; }
     public Saves()
     {
-        ora= DateTime.Now;
+        var numeroZeri = 0;
+        if (numeroZeri > 12)
+        {
+            VediPianoAccumulo.IsEnabled = false;
+        }
+        if (numeroZeri > 12)
+        {
+            VediMomentiDifficili.IsEnabled = false;
+        }
+        ora = DateTime.Now;
         unAnnoFa= ora.AddYears(-1);
         InitializeComponent();
-        ViewModel vM = new ViewModel(App.UtenteInUso.Risparmi);
-        var primaryAxis = new DateTimeAxis()
+        Utente = App.UtenteInUso;
+        BindingContext = this;
+        List<string> list = new List<string>();
+        for (int i = 0; i < Utente.Risparmi.Pensione.Length/2; i++)
         {
-            
-            Interval = 2,
-            Minimum = unAnnoFa,
-            Maximum = ora,
-            MajorTickStyle = new ChartAxisTickStyle { TickSize = 0 },
-            LabelStyle = new ChartAxisLabelStyle { LabelFormat = "" }
-        };
-        Grafico.XAxes.Add(primaryAxis);
-        NumericalAxis secondaryAxis = new NumericalAxis();
-        secondaryAxis.Minimum = 0;
-        secondaryAxis.Maximum = App.UtenteInUso.Risparmi.Pensione.Max();
-        Grafico.YAxes.Add(secondaryAxis);
-        //GraficoColonne.ItemsSource = vM.PensionSavings;
-        GraficoColonne.XBindingPath = "Months";
-        GraficoColonne.YBindingPath = "Savings";
-        GraficoColonne.Spacing = 1;
-        GraficoColonne.Width = 0.7;
-        //BindingContext = vM;
-        Grafico2.YAxes.Add(secondaryAxis);
-        Grafico2.XAxes.Add(primaryAxis);
-        //GraficoColonne2.ItemsSource = vM.PensionSavings;
-        GraficoColonne2.XBindingPath = "Months";
-        GraficoColonne2.YBindingPath = "Savings";
-        GraficoColonne2.Spacing = 1;
-        GraficoColonne2.Width = 0.7;
-        Grafico3.YAxes.Add(secondaryAxis);
-        Grafico3.XAxes.Add(primaryAxis);
-        //GraficoColonne3.ItemsSource = vM.PensionSavings;
-        GraficoColonne3.XBindingPath = "Months";
-        GraficoColonne3.YBindingPath = "Savings";
-        GraficoColonne3.Spacing = 1;
-        GraficoColonne3.Width = 0.7;
+            ora  = DateTime.Now;
+            ora = ora.AddMonths(-i);
+            list.Add("Mese di "+ CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(ora.Month) + " " + Utente.Risparmi.Pensione[i].ToString());
+        }
+        Lista1.ItemsSource = list;
+        list = new List<string>();
+
+        for (int i = 0; i < Utente.Risparmi.Pensione.Length / 2; i++)
+        {
+            ora = DateTime.Now;
+            ora = ora.AddMonths(-i);
+            list.Add("Mese di " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(ora.Month) + " " + Utente.Risparmi.PianoAccumulo[i].ToString());
+        }
+        Lista2.ItemsSource = list; 
+        list = new List<string>();
+
+        for (int i = 0; i < Utente.Risparmi.Pensione.Length / 2; i++)
+        {
+            ora = DateTime.Now;
+            ora = ora.AddMonths(-i);
+            list.Add("Mese di " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(ora.Month) + " " + Utente.Risparmi.MomentiDifficili[i].ToString());
+        }
+        Lista3.ItemsSource = list;
+
     }
     private void Indietro(object sender, EventArgs e)
     {
         Navigation.PopModalAsync();
     }
-
-    private void Home(object sender, EventArgs e)
+    private void ApriPensioneClicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new MainPage();
+        Navigation.PushModalAsync(new PaginaPensione());
+    }
+
+    private void ApriMomDifficiliClicked(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new PaginaMomDifficili());
+    }
+
+    private void ApriPianoAccumuloClicked(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new PaginaAccumulo());
     }
 }

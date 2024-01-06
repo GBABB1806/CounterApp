@@ -17,6 +17,12 @@ namespace CounterApp
             Pensione = new double[12];
             PianoAccumulo = new double[12];
             MomentiDifficili = new double[12];
+            for(int i = 0; i < 12; i++)
+            {
+                Pensione[i] = 0;
+                PianoAccumulo[i] = 1;
+                MomentiDifficili[i] = 1;
+            }
         }
         
     }

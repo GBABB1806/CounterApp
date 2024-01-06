@@ -12,6 +12,7 @@ namespace CounterApp
         public string Password { get; set; }
         public List<Spesa> Spese { get; set; }
         public Risparmio Risparmi { get; set; }
+        public List<Investimento> Investimenti { get; set; }
 
         public Utente(string email, string password)
         {
@@ -19,12 +20,13 @@ namespace CounterApp
             Password = password;
             Spese = new List<Spesa>();
             Risparmi = new Risparmio();
+            Investimenti = new List<Investimento>();
         }
         public Utente ()
         {
             Spese = new List<Spesa>();
             Risparmi = new Risparmio();
-
+            Investimenti = new List<Investimento>();
         }
     }
 }

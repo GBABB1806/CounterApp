@@ -2,24 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CounterApp.LoginPage">
-    <ScrollView>
-        <ScrollView.Background>
-            <LinearGradientBrush
-                EndPoint="1,-1"
-                StartPoint="-1, 1">
-                <GradientStop
-                    Color="#2eb2bb"
-                    Offset="-0.2"/>
-                <GradientStop
-                    Color="#030547"
-                    Offset="1"/>
-            </LinearGradientBrush>
-        </ScrollView.Background>
-        
+    <ScrollView BackgroundColor="#0c134f">
+       
         <Grid VerticalOptions="CenterAndExpand"
               HorizontalOptions="CenterAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition Height="250" />
+                <RowDefinition Height="150" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -30,13 +18,14 @@
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <Label Text="LOGIN"
-                   FontFamily="ShadowTitle"
+                   FontFamily="ChequeBlack"
                    HorizontalOptions="Center"
                    TextColor="#d9d9d9"
                    Grid.Row="0"
                    Grid.ColumnSpan="2"
                    VerticalOptions="StartAndExpand"
-                   FontSize="70"/>
+                   HorizontalTextAlignment="Center"
+                   FontSize="65"/>
             <Label Text="Inserisci l'E-mail" 
                    Grid.Column="0" 
                    Grid.Row="1"
@@ -90,7 +79,8 @@
                     Grid.ColumnSpan="2"
                     Text="Conferma" 
                     Clicked="ControlloEHome"
-                    TextColor="Black"
+                    TextColor="White"
+                    BorderColor="White"
                     BackgroundColor="Transparent"
                     BorderWidth="1"
                     HorizontalOptions="CenterAndExpand"

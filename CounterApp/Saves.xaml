@@ -14,7 +14,7 @@
                     Padding="15"/>
             <Grid x:Name="Griglia"
                   HorizontalOptions="CenterAndExpand"
-                  Margin="0,-300,0,-200"
+                  Margin="0,-50,0,-200"
                   Scale="0.5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -44,6 +44,7 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         WidthRequest="50"
+                        Clicked="ApriPensioneClicked"
                         HeightRequest="50"
                         FontAttributes="Bold"
                         FontSize="18"
@@ -58,7 +59,6 @@
                         HeightRequest="150"
                         WidthRequest="300"
                         BackgroundColor="#8997cf">
-
                     <Label Text="PIANO DI ACCUMULO" 
                            FontFamily="ChequeBlack" 
                            FontSize="Large" 
@@ -76,9 +76,11 @@
                         FontSize="18"
                         HorizontalOptions="Start"
                         CornerRadius="20"
+                        Clicked="ApriPianoAccumuloClicked"
                         BackgroundColor="#8997cf"
                         TextColor="White"
-                        Margin="10,210,0,0"/>
+                        Margin="10,210,0,0"
+                        x:Name="VediPianoAccumulo"/>
                 <Border x:Name="Nome3" 
                         Grid.Row="2" 
                         Grid.Column="0"
@@ -103,57 +105,74 @@
                         FontSize="18"
                         HorizontalOptions="Start"
                         CornerRadius="20"
+                        Clicked="ApriMomDifficiliClicked"
+                        x:Name="VediMomentiDifficili"
                         BackgroundColor="#8997cf"
                         TextColor="White"
                         Margin="10,210,0,0"/>
-                
-                <control:SfCartesianChart x:Name="Grafico"
-                                          Grid.Row="0"
-                                          Grid.Column="1"
-                                          WidthRequest="400"
-                                          HeightRequest="400"
-                                          BackgroundColor="#00cadc"
-                                          Margin="0,0,0,10">
-                    <control:SfCartesianChart.BindingContext>
-                        <local:ViewModel/>
-                    </control:SfCartesianChart.BindingContext>
-                    
-                    <control:ColumnSeries x:Name="GraficoColonne" 
-                                          ShowDataLabels="True"
-                                          ItemsSource="{Binding PensionSavings}"
-                                          XBindingPath="NomeSpesa" 
-                                          YBindingPath="Spesa">
-                        
-                    </control:ColumnSeries>
-                </control:SfCartesianChart>
-                <control:SfCartesianChart x:Name="Grafico2"
-                                          Grid.Row="1"
-                                          Grid.Column="1"
-                                          WidthRequest="400"
-                                          HeightRequest="400"
-                                          BackgroundColor="#00cadc"
-                                          Margin="0,0,0,10">
-                    <control:ColumnSeries x:Name="GraficoColonne2" 
-                                           ShowDataLabels="True" 
-                                           XBindingPath="NomeSpesa" 
-                                           YBindingPath="Spesa">
+                <ListView x:Name="Lista1"
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          WidthRequest="400"
+                          HeightRequest="150"
+                          Margin="30,0,0,0"
+                          BackgroundColor="#1EA6B2"
+                          HorizontalOptions="Center">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout >
+                                        <Label Text="{Binding}"
+                                               FontSize="25"
+                                               FontFamily="Classic"
+                                               FontAttributes="Bold"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <ListView x:Name="Lista2"
+                              Grid.Row="1"
+                              Grid.Column="1"
+                              WidthRequest="400"
+                              HeightRequest="150"
+                              HorizontalOptions="Center"
+                              BackgroundColor="#1EA6B2"
+                              VerticalOptions="Center">
 
-                    </control:ColumnSeries>
-                </control:SfCartesianChart>
-                <control:SfCartesianChart x:Name="Grafico3"
-                                          Grid.Row="2"
-                                          Grid.Column="1"
-                                          WidthRequest="400"
-                                          HeightRequest="400"
-                                          BackgroundColor="#00cadc"
-                                          Margin="0,0,0,10">
-                    <control:ColumnSeries x:Name="GraficoColonne3" 
-                                          ShowDataLabels="True" 
-                                          XBindingPath="NomeSpesa" 
-                                          YBindingPath="Spesa">
-
-                    </control:ColumnSeries>
-                </control:SfCartesianChart>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Margin="0,0,0,0">
+                                        <Label Text="{Binding}"
+                                               FontSize="25"
+                                               FontFamily="Classic"
+                                               FontAttributes="Bold"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                <ListView x:Name="Lista3"
+                          Grid.Row="2"
+                          Grid.Column="1"
+                          WidthRequest="400"
+                          HeightRequest="150"
+                          BackgroundColor="#1EA6B2"
+                          HorizontalOptions="Center">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Margin="0,0,0,0">
+                                    <Label Text="{Binding}"
+                                           FontSize="25"
+                                           FontFamily="Classic"
+                                           FontAttributes="Bold"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

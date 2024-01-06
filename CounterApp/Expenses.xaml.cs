@@ -71,8 +71,12 @@ public partial class Expenses : ContentPage
                 row.BackgroundColor = new Color(0, 202, 220);
                 row.WidthRequest = 300;
                 row.HeightRequest = 75;
+#pragma warning disable CS0618 // Il tipo o il membro è obsoleto
                 row.VerticalOptions = LayoutOptions.CenterAndExpand;
+#pragma warning restore CS0618 // Il tipo o il membro è obsoleto
+#pragma warning disable CS0618 // Il tipo o il membro è obsoleto
                 row.HorizontalOptions = LayoutOptions.CenterAndExpand;
+#pragma warning restore CS0618 // Il tipo o il membro è obsoleto
                 labelNome.HorizontalOptions = LayoutOptions.Center;
                 labelNome.VerticalOptions = LayoutOptions.Center;
                 labelValore.HorizontalOptions = LayoutOptions.Center;
@@ -111,8 +115,12 @@ public partial class Expenses : ContentPage
                 row.BackgroundColor = new Color(0, 202, 220);
                 row.WidthRequest = 300;
                 row.HeightRequest = 75;
+#pragma warning disable CS0618 // Il tipo o il membro è obsoleto
                 row.VerticalOptions = LayoutOptions.CenterAndExpand;
+#pragma warning restore CS0618 // Il tipo o il membro è obsoleto
+#pragma warning disable CS0618 // Il tipo o il membro è obsoleto
                 row.HorizontalOptions = LayoutOptions.CenterAndExpand;
+#pragma warning restore CS0618 // Il tipo o il membro è obsoleto
                 labelNome.HorizontalOptions = LayoutOptions.Center;
                 labelNome.VerticalOptions = LayoutOptions.Center;
                 labelValore.HorizontalOptions = LayoutOptions.Center;

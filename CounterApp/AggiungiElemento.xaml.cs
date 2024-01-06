@@ -9,6 +9,7 @@ namespace CounterApp;
 public partial class AggiungiElemento : ContentPage
 {
     public DateTime Ora {  get; set; }
+    private Expenses ExpensesPage; // Aggiungi campo per riferimento
     private string _tabellaAggiungere;
     private string _valoreInserito;
     private string _nomeCampo;
@@ -18,7 +19,6 @@ public partial class AggiungiElemento : ContentPage
         InitializeComponent();
         App.SalvaDatoUtente(App.UtenteInUso);
     }
-    private Expenses ExpensesPage; // Aggiungi campo per riferimento
     public AggiungiElemento(Expenses expenses)
     {
         InitializeComponent();

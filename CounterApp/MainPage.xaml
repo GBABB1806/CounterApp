@@ -75,6 +75,7 @@
                     CornerRadius="20"
                     x:Name="Investimenti"
                     Text="INVEST"
+                    Clicked="InvestimentClicked"
                     HorizontalOptions="Center"
                     WidthRequest="100"
                     TextColor="#0c134f"

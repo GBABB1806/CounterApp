@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CounterApp.PaginaPensione"
+             Title="PaginaPensione">
+    <VerticalStackLayout BackgroundColor="#8997cf">
+        <Grid HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="160"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0"
+                    Grid.Column="0"
+                    WidthRequest="125"
+                    Margin="0,30,0,0"
+                    BackgroundColor="#5c469c">
+                <Label Text="Pensione: 0.00€"
+                       x:Name="LabelMese"
+                       HorizontalTextAlignment="Center"/>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+            </Border>
+            <Grid
+                Grid.Row="1"
+                Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border
+                    WidthRequest="100"
+                    HeightRequest="300"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,30,15,10"
+                    BackgroundColor="#0b2247">
+                    <VerticalStackLayout VerticalOptions="Start">
+                        <Label Text="Gennaio"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               Margin="0,10,0,0"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="%"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               x:Name="Percentuale1"
+                               Margin="0,100,0,0"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="Febbraio"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               VerticalTextAlignment="End"
+                               Margin="0,120,0,0"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    
+                    
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="17"/>
+                    </Border.StrokeShape>
+                </Border>
+                <Border
+                    WidthRequest="100"
+                    HeightRequest="300"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,30,15,10"
+                    BackgroundColor="#0b2247">
+                    <VerticalStackLayout 
+                        VerticalOptions="Start">
+                        <Label Text="Marzo"
+                           FontFamily="Classic"
+                           FontAttributes="Bold"
+                           Margin="0,10,0,0"
+                           HorizontalTextAlignment="Center"/>
+                        <Label Text="%"
+                           FontFamily="Classic"
+                           FontAttributes="Bold"
+                           x:Name="Percentuale2"
+                           Margin="0,100,0,0"
+                           HorizontalTextAlignment="Center"/>
+                        <Label Text="Aprile"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               VerticalTextAlignment="End"
+                               Margin="0,120,0,0"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="17"/>
+                    </Border.StrokeShape>
+                </Border>
+                <Border
+                    WidthRequest="100"
+                    HeightRequest="300"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="0,30,0,10"
+                    BackgroundColor="#0b2247">
+                    <VerticalStackLayout VerticalOptions="Start">
+                        <Label Text="Maggio"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               Margin="0,10,0,0"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="%"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               x:Name="Percentuale3"
+                               Margin="0,100,0,0"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="Giugno"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               VerticalTextAlignment="End"
+                               Margin="0,120,0,0"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="17"/>
+                    </Border.StrokeShape>
+                </Border>
+                <Border
+                    WidthRequest="100"
+                    HeightRequest="300"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,0,15,0"
+                    BackgroundColor="#0b2247">
+                    <VerticalStackLayout VerticalOptions="Start">
+                        <Label Text="Luglio"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               Margin="0,10,0,0"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="%"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               x:Name="Percentuale4"
+                               Margin="0,100,0,0"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="Agosto"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               VerticalTextAlignment="End"
+                               Margin="0,120,0,0"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="17"/>
+                    </Border.StrokeShape>
+                </Border>
+                <Border
+                    WidthRequest="100"
+                    HeightRequest="300"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0,0,15,0"
+                    BackgroundColor="#0b2247">
+                    <VerticalStackLayout>
+                        <Label Text="Settembre"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               Margin="0,10,0,0"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="%"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               x:Name="Percentuale5"
+                               Margin="0,100,0,0"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="Ottobre"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               VerticalTextAlignment="End"
+                               Margin="0,120,0,0"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="17"/>
+                    </Border.StrokeShape>
+                </Border>
+                <Border
+                    WidthRequest="100"
+                    HeightRequest="300"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="0,0,0,0"
+                    BackgroundColor="#0b2247">
+                    <VerticalStackLayout>
+                        <Label Text="Novembre"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               Margin="0,10,0,0"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="%"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               x:Name="Percentuale6"
+                               Margin="0,100,0,0"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="Dicembre"
+                               FontFamily="Classic"
+                               FontAttributes="Bold"
+                               VerticalTextAlignment="End"
+                               Margin="0,120,0,0"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="17"/>
+                    </Border.StrokeShape>
+                </Border>
+            </Grid>
+            <Border Grid.Column="0"
+                    Grid.Row="2"
+                    HeightRequest="70"
+                    Margin="0,10,0,0"
+                    BackgroundColor="#5c469c">
+                <Label x:Name="UnAnno"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="17"/>
+                </Border.StrokeShape>
+            </Border>
+            <Border Grid.Column="1"
+                    Grid.Row="2"
+                    Margin="0,10,0,0"
+                    BackgroundColor="#5c469c">
+                <Label
+                    x:Name="VentAnni"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"/>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="17"/>
+                </Border.StrokeShape>
+            </Border>
+        </Grid>
+        
+    </VerticalStackLayout>
+</ContentPage>

@@ -18,6 +18,7 @@ namespace CounterApp
             VediProdotto listaDati = new VediProdotto();
             listaDati.Prodotti.Add(new Data());
             listaDati.Prodotti.Add(new Data() { NomeSpesa = "Risparmi", Spesa = 0});
+            listaDati.Prodotti.Add(new Data() { NomeSpesa = "Investimenti", Spesa = 20});
             listaDati.Prodotti[0].NomeSpesa = "Spese";
             for (int i = 0; i < App.UtenteInUso.Spese.Count; i++)
                 listaDati.Prodotti[0].Spesa += App.UtenteInUso.Spese[i].Valore;                        
@@ -69,6 +70,10 @@ namespace CounterApp
             Navigation.PushModalAsync(new AggiungiElemento( new Saves(), false));
         }
 
+        private void InvestimentClicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new InvestimentPage());
+        }
     }
 
 }
